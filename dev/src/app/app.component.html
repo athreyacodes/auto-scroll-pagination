@@ -1,0 +1,61 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{title}}</span>
+</mat-toolbar>
+
+<div class="d-flex">
+
+  <!-- Info card -->
+  <div class="pt-5 px-3">
+    <mat-card class="info">
+      <mat-card-subtitle>Loaded mails</mat-card-subtitle>
+      <mat-card-title>{{list.length}}/{{total}}</mat-card-title>
+    </mat-card>
+    <small class="mt-3 text-muted" *ngIf="loading; else msgTemplate">Loading next {{pageSize}} mails</small>
+    <ng-template #msgTemplate>
+      <small class="mt-3 text-muted" *ngIf="!areAllItemsLoaded">Scroll down to load more</small>
+      <small class="mt-3 text-muted" *ngIf="areAllItemsLoaded">All mails are loaded</small>
+    </ng-template>
+  </div>
+
+  <div>
+    <div class="container pt-5">
+      <div class="row">
+
+        <!-- List -->
+        <div class="col-3">
+          <mat-card class="p-0">
+            <mat-progress-bar color="primary" mode="indeterminate" [class.hide]="!loading"></mat-progress-bar>
+            <mat-list role="list" class="list-container" (scroll)="onScroll($event)">
+              <div class="px-3 pb-0 pt-1 border-bottom mail-item c-pointer" mat-list-item role="listitem" *ngFor="let item of list">
+                <div class="d-flex">
+                  <div class="d-flex mail-item-desc flex-column flex-grow">
+                    <div class="mail-item-text ">{{item.fromDisplayName}}</div>
+                    <small class="mail-item-text">{{item.subject}}</small>
+                    <small class="mail-item-text  text-muted">{{item.body}}</small>
+                  </div>
+                  <div>
+                    <mat-icon *ngIf="item.hasAttachment" class="text-muted fs-6">attach_file</mat-icon>
+                  </div>
+                </div>
+              </div>
+            </mat-list>
+          </mat-card>
+        </div>
+
+        <!-- Details -->
+        <div class="col-9 pt-3 px-2">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="position-fixed bottom-0 end-0">
+  <button mat-raised-button color="primary" (click)="ngOnInit()" class="m-5 py-2 px-3 rounded-pill">
+    <mat-icon>refresh</mat-icon>
+    Reset
+  </button>
+</div>

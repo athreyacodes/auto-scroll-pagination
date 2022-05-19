@@ -1,0 +1,29 @@
+.list-container {
+    overflow: auto;
+    height: 75vh;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.info {
+    min-width: 150px !important;
+}
+
+.mail-item {
+    height: 70px;
+}
+
+.mail-item-desc {
+    max-width: 95%;
+}
+
+.mail-item-text {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 95%;
+}
